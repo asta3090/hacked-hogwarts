@@ -1,0 +1,151 @@
+:root {
+  --primary-color: rgba(34, 151, 180, 0.229);
+  --secondary-color: rgb(43, 43, 43);
+}
+
+* {
+  box-sizing: border-box;
+  cursor: url(http://cur.cursors-4u.net/user/use-1/use160.cur), auto !important;
+}
+
+body {
+  margin: 0;
+  background-color: var(--primary-color);
+  padding: 10px;
+}
+
+html {
+  font-size: 100%;
+  font-family: "sans serif";
+}
+
+header img {
+  width: 20vh;
+  margin: auto;
+}
+
+/*/ stjålet https://stackoverflow.com/questions/1895476/how-do-i-style-a-select-dropdown-with-only-css /*/
+select {
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -webkit-padding-end: 20px;
+  -moz-padding-end: 20px;
+  -webkit-padding-start: 2px;
+  -moz-padding-start: 2px;
+
+  background-position: center right;
+  background-repeat: no-repeat;
+  border: 1px solid #aaa;
+  border-radius: 2px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  color: rgb(14, 7, 7);
+  font-size: inherit;
+  margin: 0;
+  overflow: hidden;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+h1 {
+  font-size: 3rem;
+  color: var(--secondary-color);
+  margin-bottom: 15px;
+  margin-top: 0;
+  font-weight: 300;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin: 0;
+  font-weight: 900;
+}
+
+h3,
+h4 {
+  font-size: 1.8rem;
+  margin: 5px 0;
+  font-weight: 300;
+  font-weight: 400;
+}
+
+.listofstudents {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-image: url(hogwartsbaggrund.jpg);
+  padding: 50px;
+  border: 3px solid rgba(68, 102, 140, 0.8);
+  grid-column-gap: 50px;
+}
+
+li {
+  font-size: 1rem;
+  color: var(--secondary-color);
+  line-height: 1.5;
+  font-family: var(--paragraph-font);
+}
+.section-wrapper {
+  padding: 50px;
+}
+.popup {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(208, 174, 174, 0.637);
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-appear {
+  display: flex;
+}
+
+.contentpopup {
+  width: 80%;
+  max-width: 600px;
+  height: 60%;
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
+  padding: 30px;
+  position: relative;
+  box-shadow: 10px 10px 20px rgba(215, 117, 117, 0.1);
+}
+
+.close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  font-size: 2.5rem;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: transparent;
+  appearance: none;
+  color: var(--secondary-color);
+}
+
+[data-house="Hufflepuff"] {
+  --primary-color: #e6b947;
+  --secondary-color: #000000;
+}
+
+[data-house="Gryffindor"] {
+  --primary-color: #85428f;
+  --secondary-color: #d0a003;
+}
+
+[data-house="Ravenclaw"] {
+  --primary-color: #ff8ce4;
+  --secondary-color: #dc8e3b;
+}
+
+[data-house="Slytherin"] {
+  --primary-color: #1b7233;
+  --secondary-color: #4f4d4d;
+}
