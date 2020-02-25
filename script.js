@@ -36,7 +36,6 @@ function start() {
   document.querySelector("[data-filter='all']").addEventListener("click", showAll);
 
   //EVENTLISTENER TIL SORTING
-  document.querySelector("[data-sort='name']").addEventListener("click", sortingName);
 
   getJson();
   document.querySelector("select#theme").addEventListener("change", selectTheme);
@@ -46,7 +45,7 @@ async function getJson() {
   const jsonData = await fetch("https://petlatkea.dk/2020/hogwarts/students.json");
 
   studentJSON = await jsonData.json();
-  arrangeObjects();
+  prepareObjects();
 }
 
 function selectTheme() {
@@ -236,19 +235,19 @@ function isAll(student) {
   return student;
 }
 
-//SORTER
+// //SORTER
 
-function sortingName() {
-  const sortName = currentList.sort(compareName);
-  displayList(currentList);
-}
+// function sortingName() {
+//   const sortName = currentList.sort(compareName);
+//   displayList(currentList);
+// }
 
-function compareName(a, b) {
-  if (a.name < b.name) {
-    return -1;
-  } else if (a.name > b.name) {
-    return -1;
-  } else {
-    return 1;
-  }
-}
+// function compareName(a, b) {
+//   if (a.name < b.name) {
+//     return -1;
+//   } else if (a.name > b.name) {
+//     return -1;
+//   } else {
+//     return 1;
+//   }
+// }
