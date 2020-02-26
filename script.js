@@ -7,6 +7,8 @@ let studentJSON = [];
 let allOfStudent = [];
 let currentList = [];
 let countsOfStudents;
+const myHeading = document.querySelectorAll(".sort");
+const myButtons = document.querySelectorAll(".filter");
 
 const Student = {
   firstName: "",
@@ -14,7 +16,8 @@ const Student = {
   middleName: null,
   nickName: null,
   image: null,
-  house: ""
+  house: "",
+  prefect: false
 };
 
 //START OG HENT JSON
@@ -35,7 +38,13 @@ function start() {
   document.querySelector("[data-filter='Slytherin']").addEventListener("click", filterSlytherin);
   document.querySelector("[data-filter='all']").addEventListener("click", showAll);
 
-  //EVENTLISTENER TIL SORTING
+  myHeading.forEach(button => {
+    button.addEventListener("click", sortButtonClick);
+  });
+
+  myButtons.forEach(botton => {
+    botton.addEventListener("click", filterBottonClick);
+  });
 
   getJson();
   document.querySelector("select#theme").addEventListener("change", selectTheme);
@@ -61,6 +70,8 @@ function showPopup(student) {
   document.querySelector(".contentpopup").setAttribute("data-house", student.house);
 
   document.querySelector(".contentpopup>h3").textContent = "House: " + student.house;
+
+  document.querySelector(".contentpopup>h4").textContent = "Gender: " + student.gender;
 
   document.querySelector(".contentpopup>img").src = `images/${student.image}.png`;
 
@@ -149,6 +160,13 @@ function cleanData(studentData) {
     student.image = null;
   }
 
+  //GENDER
+
+  let genderDisplay = studentData.gender;
+  let firstCharGender = genderDisplay.substring(0, 1);
+  firstCharGender = firstCharGender.toUpperCase();
+  student.gender = firstCharGender + genderDisplay.substring(1);
+
   // hus
   student.house = studentData.house.toLowerCase();
   student.house = student.house.trim();
@@ -162,6 +180,18 @@ function cleanData(studentData) {
 
 function showStudent(student) {
   let klon = HTML.template.cloneNode(true).content;
+
+  //SET PREFECT
+
+  // let studentPrefect = clone.querySelector("li");
+
+  // if (student.prefect === true) {
+  //   studentPrefect.textContent = "";
+  // } else {
+  //   studentPrefect.textContent = "";
+  // }
+
+  //VIS STUDENT KLON TEMPLATE
 
   if (student.lastName == undefined) {
     klon.querySelector("li").textContent = student.firstName;
@@ -235,19 +265,78 @@ function isAll(student) {
   return student;
 }
 
-// //SORTER
+//INSPIRATION FRA PETER ULF
+//SORT
 
-// function sortingName() {
-//   const sortName = currentList.sort(compareName);
-//   displayList(currentList);
-// }
+function sortButtonClick() {
+  console.log("sortButton");
 
-// function compareName(a, b) {
-//   if (a.name < b.name) {
-//     return -1;
-//   } else if (a.name > b.name) {
-//     return -1;
-//   } else {
-//     return 1;
-//   }
-// }
+  //const sort = this.dataset.sort;
+  if (this.dataset.action === "sort") {
+    clearAllSort();
+    console.log("forskellig fra sorted", this.dataset.action);
+    this.dataset.action = "sorted";
+  } else {
+    if (this.dataset.sortDirection === "asc") {
+      this.dataset.sortDirection = "desc";
+      console.log("sortdir desc", this.dataset.sortDirection);
+    } else {
+      this.dataset.sortDirection = "asc";
+      console.log("sortdir asc", this.dataset.sortDirection);
+    }
+  }
+  mySort(this.dataset.sort, this.dataset.sortDirection);
+}
+
+function clearAllSort() {
+  console.log("clearAllSort");
+  myHeading.forEach(botton => {
+    botton.dataset.action = "sort";
+  });
+}
+
+function mySort(sortBy, sortDirection) {
+  console.log(`mySort-, ${sortBy} sortDirection-  ${sortDirection}  `);
+  let desc = 1;
+
+  currentList = allOfStudent.filter(allOfStudent => true);
+
+  if (sortDirection === "desc") {
+    desc = -1;
+  }
+
+  currentList.sort(function(a, b) {
+    var x = a[sortBy];
+    var y = b[sortBy];
+    if (x < y) {
+      return -1 * desc;
+    }
+    if (x > y) {
+      return 1 * desc;
+    }
+    return 0;
+  });
+
+  displayList(currentList);
+}
+
+//NYT FILTER
+
+function filterBottonClick() {
+  const filter = this.dataset.filter;
+  clearAllSort();
+  myFilter(filter);
+}
+
+function myFilter(filter) {
+  console.log("myFilter", filter);
+  if (filter === "all") {
+    currentList = allOfStudent.filter(allOfStudent => true);
+    displayList(currentList);
+  } else {
+    currentList = allOfStudent.filter(student => student.house === filter);
+    displayList(currentList);
+  }
+}
+
+//SEARCHING

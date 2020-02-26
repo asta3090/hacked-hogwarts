@@ -24,7 +24,15 @@
             <option value="Ravenclaw">Ravenclaw</option>
             <option value="Slytherin">Slytherin</option>
           </select>
+          <br />
+          Sort names
+          <button class="sort" data-sort-direction="asc" data-sort="firstName">Firstname</button>
+          <button class="sort" data-sort-direction="asc" data-sort="lastName">Lastname</button>
+          <button class="sort" data-sort-direction="asc" data-sort="gender">Gender</button>
+          <button class="sort" data-sort-direction="asc" data-sort="house">House</button>
 
+          <br />
+          Filter houses
           <section claas="filtrering">
             <button class="filter" data-action="filter" data-filter="Gryffindor">Gryffindor</button>
             <button class="filter" data-action="filter" data-filter="Hufflepuff">Hufflepuff</button>
@@ -32,12 +40,7 @@
             <button class="filter" data-action="filter" data-filter="Slytherin">Slytherin</button>
             <button class="filter" data-action="filter" data-filter="all">All</button>
           </section>
-
-          <table id="list">
-            <section class="sortering">
-              <th data-action="sort" data-sort-direction="asc" data-sort="name">Firstname</th>
-            </section>
-          </table>
+          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name" />
         </label>
 
         <ul class="listofstudents"></ul>
@@ -47,6 +50,7 @@
           <button class="close">X</button>
           <h2></h2>
           <h3></h3>
+          <h4></h4>
           <img src=""
         </article>
       </div>
